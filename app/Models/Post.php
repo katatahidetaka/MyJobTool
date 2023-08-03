@@ -18,7 +18,7 @@ class Post extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
-        //使わなくても行けた
+      //使わなくても行けた
       //return $this->belongsTomeny(Tag::class, 'post_tag')->using(PostTag::class);
     }
 }
