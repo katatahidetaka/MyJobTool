@@ -4,8 +4,9 @@ namespace App\Http\Controllers\post;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StorePostRequest;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -14,7 +15,7 @@ class PostController extends Controller
         return view('post.create');
     }
     
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
         DB::transaction(function () use ($request){
             $post = Post::create([
@@ -26,6 +27,16 @@ class PostController extends Controller
                 $post->tags()->attach($tag);
             }
         });
-        return back();
+        $request->session()->flash('message','成功しました');
+        return redirect()->route('post.index');
+    }
+    
+    public function index(Request $request)
+    {
+        //$posts = Post::all(); //titleとcontentのみの取得(postテーブルにある情報のみ)
+        //Eager Loading
+        $posts = Post::with('tags')->get();
+        //dd($posts);
+        return view('post.index',compact('posts'));
     }
 }
