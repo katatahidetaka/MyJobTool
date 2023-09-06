@@ -7,12 +7,15 @@ use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
-    public function create()
+    public function create(Tag $tag)
     {
-        return view('post.create');
+        $tagList = $tag->all();
+        return view('post.create',compact('tagList'));
     }
     
     public function store(StorePostRequest $request)
@@ -36,7 +39,6 @@ class PostController extends Controller
     
     public function index(Request $request)
     {
-        //$posts = Post::all(); //titleとcontentのみの取得(postテーブルにある情報のみ)
         //Eager Loading
         $posts = Post::with('tags')->get();
         return view('post.index',compact('posts'));
@@ -47,16 +49,17 @@ class PostController extends Controller
         return view('post.show',compact('post'));
     }
     
-    public function edit(Post $post)
+    public function edit(Post $post, Tag $tag)
     {
-        return view ('post.edit',compact('post'));
+        $tagList = $tag->all();
+        return view ('post.edit',compact('post','tagList'));
     }
     
     public function update(StorePostRequest $request ,Post $post)
     {
         $post->title = $request->title;
         $post->content = $request->content;
-        $post->update();
+        $post->save();
         //create時と異なり、タグがあったのになくなった(null)場合があるのでnullの場合の条件分岐が必要
         if (is_array($request->tags)) {
             $post->tags()->sync($request->tags);
@@ -67,7 +70,7 @@ class PostController extends Controller
         return redirect()->route('post.show',compact('post'));
     }
     
-    public function delete(Request $request, Post $post)
+    public function delete(Post $post)
     {
         $id = $post->id;
         DB::transaction(function() use ($id){
