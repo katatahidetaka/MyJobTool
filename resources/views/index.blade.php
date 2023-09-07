@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name=”viewport” content=”width=device-width,initial-scale=1”>
-
-<title>MyJobTool|TOP</title>
-<!-- Bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
-	
-</body>
-</html>
+<x-app>
+	<x-slot name="title">MyJobTool|TOP</x-slot>
+	<h1>HeLLO WOrLd!!</h1>
+</x-app>

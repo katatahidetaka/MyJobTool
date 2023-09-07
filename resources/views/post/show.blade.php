@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name=”viewport” content=”width=device-width,initial-scale=1”>
-
-<title>MyJobTool|記事詳細</title>
-<!-- Bootstrap -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
+<x-app>
+	<x-slot name="title">MyJobTool|記事詳細</x-slot>
 	<div class="container border rounded my-3 shadow">
 	@if(session('message'))
 		<div class="row my-2">
@@ -25,7 +12,7 @@
 			<h2 class="col m-3">{{ $post->title }}</h2>
 		</div>
 		<div class="row text-end border-top border-3">
-			<span class="col">投稿日：{{ $post->created_at }}　最終更新日：{{ $post->updated_at }}</span>
+			<span class="col">投稿日：{{ $post->created_at }} 最終更新日：{{ $post->updated_at }}</span>
 		</div>
 		<div class="row">
 			<div class="col">
@@ -61,5 +48,4 @@
 			}
 		}
 	</script>
-</body>
-</html>
+</x-app>
