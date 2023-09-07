@@ -1,4 +1,3 @@
 <x-app>
-	<x-slot name="title">MyJobTool|TOP</x-slot>
-	<h1>HeLLO WOrLd!!</h1>
+	<x-slot name="title">トップページ</x-slot>
 </x-app>

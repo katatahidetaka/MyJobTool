@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\post;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StorePostRequest;
@@ -70,15 +69,15 @@ class PostController extends Controller
         return redirect()->route('post.show',compact('post'));
     }
     
-    public function delete(Post $post)
+    public function destroy(Post $post)
     {
         $id = $post->id;
         DB::transaction(function() use ($id){
-            $deletePost = Post::with('tags')->where('id',$id)->firstOrFail();
+            $destroyPost = Post::with('tags')->where('id',$id)->firstOrFail();
             //リレーションは先に削除してから
-            $deletePost->tags()->detach();
+            $destroyPost->tags()->detach();
             //deleteする
-            $deletePost->delete();
+            $destroyPost->delete();
         });
             return redirect()->route('post.index')->with('message','削除に成功しました');
     }

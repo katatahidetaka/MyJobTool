@@ -1,5 +1,5 @@
 <x-app>
-	<x-slot name="title">MyJobTool|記事の編集</x-slot>
+	<x-slot name="title">記事の編集</x-slot>
 	<form method="post" action="{{ route('post.update',$post) }}"
 		class="container border rounded mt-5">
 		@csrf

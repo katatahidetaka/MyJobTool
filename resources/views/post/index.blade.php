@@ -1,5 +1,5 @@
 <x-app>
-	<x-slot name="title">MyJobTool|記事一覧</x-slot>
+	<x-slot name="title">記事一覧</x-slot>
 	<div class="container">
 	@if(session('message'))
 		<div class="row my-2">
@@ -20,7 +20,7 @@
 		<div class="row">
 			<div class="col">
 				<div class="d-flex align-items-center my-2">
-					{!! nl2br(e($post->content)) !!}
+					<p class="text-truncate">{!! nl2br(e($post->content)) !!}</p>
 				</div>
 			</div>
 		</div>

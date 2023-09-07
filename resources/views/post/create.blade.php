@@ -1,5 +1,5 @@
 <x-app>
-	<x-slot name="title">MyJobTool|記事新規作成</x-slot>
+	<x-slot name="title">記事新規作成</x-slot>
 	<form method="post" action="{{ route('post.store') }}"
 		class="container border rounded mt-5">
 		@csrf

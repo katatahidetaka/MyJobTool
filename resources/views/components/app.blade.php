@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name=”viewport” content=”width=device-width,initial-scale=1”>
 
-<title>{{ $title }}</title>
+<title>MyJobTool|{{ $title }}</title>
 <!-- Bootstrap -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -34,7 +34,10 @@
 	</nav>
 </header>
 <body>
+<div class="container my-3">
+	<h1>{{ $title }}</h1>
 	{{ $slot }}
+</div>
 </body>
 <footer class="fixed-bottom">
 	<div class="conteiner-fluid bg-secondary-subtle">

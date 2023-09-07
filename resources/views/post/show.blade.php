@@ -1,5 +1,5 @@
 <x-app>
-	<x-slot name="title">MyJobTool|記事詳細</x-slot>
+	<x-slot name="title">記事詳細</x-slot>
 	<div class="container border rounded my-3 shadow">
 	@if(session('message'))
 		<div class="row my-2">
@@ -32,19 +32,19 @@
 		<div class="row">
 			<div class="col my-2">
 					<a href="{{ route('post.edit',$post) }}"><button class="btn btn-primary">編集する</button></a>
-					<button class="btn btn-danger" onclick="deleteBtn()">削除する</button>	
+					<button class="btn btn-danger" onclick="destroyBtn()">削除する</button>	
 			</div>
 		</div>
 	</div>
-	<form method="post" action="{{ route('post.delete',$post) }}" id="deleteForm">
+	<form method="post" action="{{ route('post.destroy',$post) }}" id="destroyForm">
 	@csrf
 	@method('delete')
 	</form>
 	<script>
-		function deleteBtn(){
+		function destroyBtn(){
 			let result = window.confirm('本当に削除してもよろしいですか？');
 			if(result){
-				document.getElementById('deleteForm').submit();
+				document.getElementById('destroyForm').submit();
 			}
 		}
 	</script>
