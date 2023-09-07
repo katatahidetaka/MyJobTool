@@ -6,7 +6,6 @@ use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\Request;
-use App\Models\Category;
 use App\Models\Tag;
 
 class PostController extends Controller
