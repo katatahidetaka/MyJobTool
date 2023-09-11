@@ -1,13 +1,7 @@
 <x-app>
 	<x-slot name="title">記事一覧</x-slot>
 	<div class="container">
-	@if(session('message'))
-		<div class="row my-2">
-			<div class="alert alert-primary" role="alert">
-				<p>{{ session('message') }}</p>
-			</div>
-		</div>
-	@endif
+	<x-message :message="session('message')"/>
 	@foreach($posts as $post)
 	<div class="container border rounded my-1">
 		<div class="row bg-info-subtle">

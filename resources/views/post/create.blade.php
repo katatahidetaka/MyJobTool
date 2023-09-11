@@ -1,18 +1,10 @@
 <x-app>
 	<x-slot name="title">記事新規作成</x-slot>
+	@include('common.error')
 	<form method="post" action="{{ route('post.store') }}"
 		class="container border rounded mt-5">
 		@csrf
-		<div class="row m-2">
-			@if(!empty($errors->all()))
-			<div class="alert alert-danger" role="alert">
-			@foreach($errors->all() as $message)
-				<p>{{ $message }}</p>
-			@endforeach
-			</div>
-			@endif
-		</div>
-		<div class="row mb-3">
+		<div class="row my-3">
 			<label class="col-sm-2 col-form-label">タイトル</label>
 			<div class="col-sm-10">
 				<input type="text" id="title" name="title" placeholder="50字以内" class="form-control" maxlength="50">

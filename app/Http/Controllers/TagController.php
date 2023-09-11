@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Http\Requests\StoreTagRequest;
 
 class TagController extends Controller
 {
@@ -14,23 +15,31 @@ class TagController extends Controller
      */
     public function index(Category $category)
     {
+        $categoriesArray = $category->getCategoriesArray();
         $categoryList[] = $category->getCategoryList();
-        return view('tag.index', compact('categoryList'));
+        return view('tag.index', compact('categoryList', 'categoriesArray'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTagRequest $request)
     {
-        //
+        $tag = new Tag();
+        $tag->name = $request->tagName;
+        $tag->category_id = $request->categoryId;
+        $tag->save();
+        
+        return redirect()->route('tag.index')->with('message', '新規タグを作成しました');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tag $tag)
+    public function update(StoreTagRequest $request)
     {
+        $tag = Tag::findOrFail($request->tagId);
+        $tag->category_id = $request->categoryId;
         $tag->name = $request->tagName;
         $tag->save();
         return redirect()->route('tag.index')->with('message', 'タグを編集しました');

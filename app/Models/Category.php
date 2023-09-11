@@ -30,4 +30,14 @@ class Category extends Model
         }
         return $categoryList;
     }
+    
+    public function getCategoriesArray():array
+    {
+        $categories = self::all();
+        $categoriesArray = [];
+        foreach ($categories as $category){
+            $categoriesArray[$category->id] = $category->name;
+        }
+        return $categoriesArray;
+    }
 }
