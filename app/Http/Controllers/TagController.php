@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models\Tag;
 
@@ -40,6 +41,14 @@ class TagController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::transaction(function() use ($id){
+            $tag = Tag::with('posts')->where('id',$id)->firstOrFail();
+            //リレーションは先に削除してから
+            $tag->posts()->detach();
+            //deleteする
+            $tag->delete();
+        });
+        
+        return redirect()->route('tag.index')->with('message', 'タグを削除しました');
     }
 }
