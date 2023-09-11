@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\Request;
 use App\Models\Tag;
+use App\Models\Category;
 
 class PostController extends Controller
 {
-    public function create(Tag $tag)
+    public function create(Category $category)
     {
-        $tagList = $tag->all();
+        $tagList = $category->getTagList();
         return view('post.create',compact('tagList'));
     }
     
@@ -47,9 +48,9 @@ class PostController extends Controller
         return view('post.show',compact('post'));
     }
     
-    public function edit(Post $post, Tag $tag)
+    public function edit(Post $post, Category $category)
     {
-        $tagList = $tag->all();
+        $tagList = $category->getTagList();
         return view ('post.edit',compact('post','tagList'));
     }
     

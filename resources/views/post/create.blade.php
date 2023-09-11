@@ -14,10 +14,10 @@
 			<label class="col-sm-2 col-form-label">タグ</label><!-- col-form-labelでlabelを垂直にきれいに並べることができる -->
 			<div class="col-sm-10">
 				<div class="row">
-					@foreach ($tagList as $tag)
+					@foreach ($tagList as $tagId => $tagName)
 					<div class="form-check col-2">
-						<input class="form-check-input" type="checkbox" name="tags[]" value="{{ $tag->id }}" id="radios{{ $tag->id }}">
-						<label class="form-check-label" for="radios{{ $tag->id }}">{{ $tag->name }}</label>
+						<input class="form-check-input" type="checkbox" name="tags[]" value="{{ $tagId }}" id="radios{{ $tagId }}">
+						<label class="form-check-label" for="radios{{ $tagId }}">{{ $tagName }}</label>
 					</div>
 					@endforeach
 				</div>

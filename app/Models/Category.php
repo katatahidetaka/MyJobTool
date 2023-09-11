@@ -40,4 +40,16 @@ class Category extends Model
         }
         return $categoriesArray;
     }
+    
+    public function getTagList()
+    {
+        $categories = self::with('tags')->get();
+        $tagList = [];
+        foreach($categories as $category){
+            foreach($category->tags as $tag){
+                $tagList[$tag->id] = $tag->name;
+            }
+        }
+        return $tagList;
+    }
 }
