@@ -18,5 +18,11 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        //Seederを一回のコマンドで順番に実行する
+        $this->call([
+            PostSeeder::class,
+            TagSeeder::class,
+            CategorySeeder::class,
+        ]);
     }
 }

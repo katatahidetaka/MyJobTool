@@ -22,5 +22,15 @@ class PostSeeder extends Seeder
             'title' => 'テストタイトル２',
             'content' => 'テスト投稿２'
         ]);
+        
+        Post::create([
+            'title' => 'テストタイトル３',
+            'content' => 'テスト投稿３'
+        ]);
+        
+        Post::create([
+            'title' => 'テストタイトル４',
+            'content' => 'テスト投稿４'
+        ]);
     }
 }
