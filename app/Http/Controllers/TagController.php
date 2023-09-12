@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Http\Requests\StoreTagRequest;
@@ -50,13 +50,19 @@ class TagController extends Controller
      */
     public function destroy(string $id)
     {
-        DB::transaction(function() use ($id){
+        try {
+            DB::beginTransaction();
+            
             $tag = Tag::with('posts')->where('id',$id)->firstOrFail();
-            //リレーションは先に削除してから
             $tag->posts()->detach();
-            //deleteする
             $tag->delete();
-        });
+            throw new \Exception();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            return redirect()->route('tag.index')->with('message', '処理に失敗しました');
+        }
         
         return redirect()->route('tag.index')->with('message', 'タグを削除しました');
     }

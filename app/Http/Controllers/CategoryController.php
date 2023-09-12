@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Tag;
 
@@ -46,20 +48,27 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        dd($id);
-//         $deleteTagId = [];
-//         $category = Category::findOrFail($id);
-//         $category->delete();
-//         //削除するカテゴリに所属するタグも削除する
-//        $tags = Tag::where('category_id', $id)->get();
-       
-//        foreach ($tags as $tagId) {
-//            $deleteTagId[] = $tagId ->id;
-//        }
-//        $tag->posts()->detach($deleteTagId);
-       
-//        $tag->delete();
+        //削除するカテゴリに所属するタグも削除する
+        $tags = Tag::where('category_id', $id)->get();
+        foreach($tags as $tagId) {
+            try {
+                DB::beginTransaction();
+                
+                $tag = Tag::with('posts')->where('id',$tagId->id)->firstOrFail();
+                $tag->posts()->detach();
+                $tag->delete();
+                throw new \Exception();
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                Log::error($e);
+                return redirect()->route('tag.index')->with('message', '処理に失敗しました');
+            }
+        }
         
-//         return redirect()->route('category.index')->with('message', 'タグを削除しました');
+        $category = Category::findOrFail($id);
+        $category->delete();
+        
+        return redirect()->route('category.index')->with('message', 'タグを削除しました');
     }
 }

@@ -54,7 +54,7 @@ class TagSeeder extends Seeder
         ]);
         
         Tag::create([
-            'name' => 'タグ21',
+            'name' => 'タグ31',
             'category_id' => '3'
         ]);
         
