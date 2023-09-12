@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,6 @@ Route::get('/', function () {
 })->name('home');
 
 Route::resource('post', PostController::class);
+
+Route::resource('tag', TagController::class, 
+    ['only' => ['index', 'store', 'update', 'destroy']]);

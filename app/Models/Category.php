@@ -22,12 +22,34 @@ class Category extends Model
     public function getCategoryList(): array
     {
         $categories = self::with('tags')->get();
-        $categoryList=[];
+        $categoryList = [];
         foreach($categories as $category){
             foreach($category->tags as $tag){
-                $categoryList[$category->name][] = $tag->name;
+                $categoryList[$category->id][$category->name][$tag->id] = $tag->name;
             }
         }
         return $categoryList;
+    }
+    
+    public function getCategoriesArray():array
+    {
+        $categories = self::all();
+        $categoriesArray = [];
+        foreach ($categories as $category){
+            $categoriesArray[$category->id] = $category->name;
+        }
+        return $categoriesArray;
+    }
+    
+    public function getTagList()
+    {
+        $categories = self::with('tags')->get();
+        $tagList = [];
+        foreach($categories as $category){
+            foreach($category->tags as $tag){
+                $tagList[$tag->id] = $tag->name;
+            }
+        }
+        return $tagList;
     }
 }
