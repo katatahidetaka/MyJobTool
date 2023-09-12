@@ -14,7 +14,8 @@
 					<option value="{{ $ctgId }}" label="{{ $ctgName }}"></option>
 					@endforeach
 				</select>
-				<input type="text" name="tagName" id="tagName" placeholder="タグ名を記入(10字以内)" style="vertical-align : middle;"/>
+				<input type="text" name="tagName" id="tagName" placeholder="タグ名を記入(10字以内)"
+				maxlength="10" style="vertical-align : middle;"/>
 				<button type="submit" class="btn btn-primary btn-sm" style="vertical-align : middle;">登録</button>
 			</form>
 		</div>
