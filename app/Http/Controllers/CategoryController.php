@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Models\Tag;
 
 class CategoryController extends Controller
 {
@@ -45,6 +46,20 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        dd($id);
+//         $deleteTagId = [];
+//         $category = Category::findOrFail($id);
+//         $category->delete();
+//         //削除するカテゴリに所属するタグも削除する
+//        $tags = Tag::where('category_id', $id)->get();
+       
+//        foreach ($tags as $tagId) {
+//            $deleteTagId[] = $tagId ->id;
+//        }
+//        $tag->posts()->detach($deleteTagId);
+       
+//        $tag->delete();
+        
+//         return redirect()->route('category.index')->with('message', 'タグを削除しました');
     }
 }

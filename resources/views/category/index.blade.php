@@ -21,6 +21,12 @@
 							<input type="submit" value="編集" class="btn btn-info btn-sm"
 							 style="vertical-align : top;">
 						</form>
+						<form method="post" action="{{ route('category.destroy', $categoryId) }}" class="my-2"
+						onclick="return confirm('カテゴリに分類されているタグも消えてしまいます。削除してもよろしいですか？');">
+						@csrf
+						@method('delete')
+							<input type="submit" class="btn btn-danger btn-sm" value="削除">
+						</form>
 					</div>
 				</div>
 				<div class="row">

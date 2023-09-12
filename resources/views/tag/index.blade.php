@@ -44,7 +44,6 @@
 					<form method="post" action="{{ route('tag.destroy', $tagId) }}" onclick="return confirm('削除してもよろしいですか？');">
 					@csrf
 					@method('delete')
-						<input type="hidden" name="tagName" value="{{ $tag }}"></input>
 						<button type="submit" class="btn btn-outline-danger btn-sm">削除</button>
 					</form>
 					</div>
