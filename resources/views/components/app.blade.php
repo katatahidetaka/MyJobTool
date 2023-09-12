@@ -27,6 +27,7 @@
 					<li class="nav-item"><a class="nav-link" href="{{ route('post.create') }}">記事新規作成</a></li>
 					<li class="nav-item"><a class="nav-link" href="{{ route('post.index') }}">記事一覧</a></li>
 					<li class="nav-item"><a class="nav-link" href="{{ route('tag.index') }}">タグ編集</a></li>
+					<li class="nav-item"><a class="nav-link" href="{{ route('category.index') }}">カテゴリ編集</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

@@ -57,7 +57,7 @@ class CategoryController extends Controller
                 $tag = Tag::with('posts')->where('id',$tagId->id)->firstOrFail();
                 $tag->posts()->detach();
                 $tag->delete();
-                throw new \Exception();
+
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();
