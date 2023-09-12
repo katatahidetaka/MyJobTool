@@ -14,7 +14,8 @@
 					<option value="{{ $ctgId }}" label="{{ $ctgName }}"></option>
 					@endforeach
 				</select>
-				<input type="text" name="tagName" id="tagName" placeholder="タグ名を記入(10字以内)" style="vertical-align : middle;"/>
+				<input type="text" name="tagName" id="tagName" placeholder="タグ名を記入(10字以内)"
+				maxlength="10" style="vertical-align : middle;"/>
 				<button type="submit" class="btn btn-primary btn-sm" style="vertical-align : middle;">登録</button>
 			</form>
 		</div>
@@ -43,7 +44,6 @@
 					<form method="post" action="{{ route('tag.destroy', $tagId) }}" onclick="return confirm('削除してもよろしいですか？');">
 					@csrf
 					@method('delete')
-						<input type="hidden" name="tagName" value="{{ $tag }}"></input>
 						<button type="submit" class="btn btn-outline-danger btn-sm">削除</button>
 					</form>
 					</div>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,7 @@ Route::get('/', function () {
 Route::resource('post', PostController::class);
 
 Route::resource('tag', TagController::class, 
+    ['only' => ['index', 'store', 'update', 'destroy']]);
+
+Route::resource('category', CategoryController::class,
     ['only' => ['index', 'store', 'update', 'destroy']]);

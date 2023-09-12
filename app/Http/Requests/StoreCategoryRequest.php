@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTagRequest extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,17 +22,15 @@ class StoreTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tagName' => 'required|max:10',
-            'categoryId' => 'required'
+            'categoryName' => 'required|max:10'
         ];
     }
     
-    public function messages(): array
+    public function messages() : array
     {
         return [
-            'tagName.required' => 'タグ名を入力してください。',
-            'tagName.max' => 'タグは10字以内で登録してください。',
-            'categoryId.required' => 'カテゴリーを選択してください。'
+            'categoryName.required' => 'カテゴリを入力してください',
+            'categoryName.max' => 'カテゴリは10字以内で登録してください'
         ];
     }
 }
