@@ -19,15 +19,19 @@ class Category extends Model
         return $this->hasMany(Tag::class);
     }
     
-    public function getCategoryList(): array
+    public function getCategoryList()
     {
-        $categories = self::with('tags')->get();
+        $categories = Self::with('tags')->get();
         $categoryList = [];
-        foreach($categories as $category){
-            foreach($category->tags as $tag){
-                $categoryList[$category->id][$category->name][$tag->id] = $tag->name;
+        
+        foreach ($categories as $category) {
+            $categoryList[$category->id][$category->name] = [];
+            $tagArray = [];
+            foreach ($category->tags as $tag) {
+                $tagArray[$tag->id] = $tag->name;
             }
-        }
+            $categoryList[$category->id][$category->name] = $tagArray;
+        }        
         return $categoryList;
     }
     
