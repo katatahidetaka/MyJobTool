@@ -22,7 +22,7 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'categoryName' => 'required|max:10'
+            'categoryName' => 'required|unique:categories,name|max:10'
         ];
     }
     
@@ -30,6 +30,7 @@ class StoreCategoryRequest extends FormRequest
     {
         return [
             'categoryName.required' => 'カテゴリを入力してください',
+            'categoryName.unique' => '同じカテゴリ名は登録できません。',
             'categoryName.max' => 'カテゴリは10字以内で登録してください'
         ];
     }

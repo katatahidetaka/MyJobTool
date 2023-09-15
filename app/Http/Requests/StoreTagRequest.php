@@ -22,7 +22,7 @@ class StoreTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tagName' => 'required|max:10',
+            'tagName' => 'required|unique:tags,name|max:10',
             'categoryId' => 'required'
         ];
     }
@@ -31,6 +31,7 @@ class StoreTagRequest extends FormRequest
     {
         return [
             'tagName.required' => 'タグ名を入力してください。',
+            'tagName.unique' => '同じ名前のタグが既に存在しています。',
             'tagName.max' => 'タグは10字以内で登録してください。',
             'categoryId.required' => 'カテゴリーを選択してください。'
         ];

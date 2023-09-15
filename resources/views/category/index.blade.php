@@ -2,7 +2,19 @@
 	<x-slot name="title">カテゴリ編集</x-slot>
 	<x-message :message="session('message')"/>
 	@include('common.error')
-<!-- 	ここにカテゴリーの新規登録機能を追加 -->
+	<div class="border rounded p-3 mb-3 container">
+		<div class="row">
+			<div class="m-1">カテゴリの新規登録</div>
+		</div>
+		<div class="row">
+			<form method="post" action="{{ route('category.store') }}">
+			@csrf
+				<input type="text" name="categoryName" id="categoryName" placeholder="カテゴリ名を記入(10字以内)"
+				maxlength="10" style="vertical-align : middle;"/>
+				<button type="submit" class="btn btn-primary btn-sm" style="vertical-align : middle;">登録</button>
+			</form>
+		</div>
+	</div>
 	<div class="border rounded p-3 container">
 		<div class="row">
 			<div class="m-1">カテゴリの編集(カテゴリは1つずつ編集してください)</div>
