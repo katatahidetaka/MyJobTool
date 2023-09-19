@@ -12,12 +12,12 @@
 			<h2 class="col m-3">{{ $post->title }}</h2>
 		</div>
 		<div class="row text-end border-top border-3">
-			<span class="col">投稿日：{{ $post->created_at }} 最終更新日：{{ $post->updated_at }}</span>
+			<span class="col">投稿日：{{ $post->created_at->format('Y/m/d') }}　最終更新日：{{ $post->updated_at->format('Y/m/d') }}</span>
 		</div>
 		<div class="row">
 			<div class="col">
 				@foreach($post->tags as $tag)
-					<a href="{{ $tag->id }}"><span>{{ $tag->name }}</span></a>
+					<a href="{{ route('searchByTags', $tag->id) }}"><span>{{ $tag->name }}</span></a>
 				@endforeach
 				@if(!isset($tag))
 					<span class="text-danger">この記事には、タグが設定されていません。</span>
