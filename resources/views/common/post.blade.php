@@ -6,7 +6,7 @@
 			<div class="col-7 d-flex align-items-center my-3">
 					<h6><a href="{{ route('post.show',$post) }}">{{ $post->title }}</a></h6>
 			</div>
-			<div class="col-5 d-flex my-1">
+			<div class="col-5 d-flex my-1 justify-content-end">
 				<div class="text-end d-flex align-items-end">
 				<span>投稿日：{{ $post->created_at->format('Y/m/d') }}　最終更新日：{{ $post->updated_at->format('Y/m/d') }}</span>
 				</div>
