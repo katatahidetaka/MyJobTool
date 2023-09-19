@@ -10,7 +10,7 @@ class SearchController extends Controller
     public function searchByTags(int $id)
     {
         $tag = Tag::find($id);
-        $posts = $tag->posts;
+        $posts = $tag->posts()->orderBy('created_at', 'DESC')->get();
         $tagName = $tag->name;
         
         return view('search.tag',compact('posts', 'tagName'));
