@@ -4,6 +4,7 @@ use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,6 @@ Route::resource('tag', TagController::class,
 
 Route::resource('category', CategoryController::class,
     ['only' => ['index', 'store', 'update', 'destroy']]);
+
+Route::get('search/tag/{tag}', [SearchController::class, 'searchByTags'])
+    ->name('searchByTags');
