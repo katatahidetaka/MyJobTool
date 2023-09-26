@@ -17,7 +17,11 @@
 				<div class="row">
 					@foreach ($tagList as $tagId => $tagName)
 					<div class="form-check col-2">
+					@if(in_array($tagId, $tagArray))
+						<input class="form-check-input" type="checkbox" name="tags[]" value="{{ $tagId }}" id="radios{{ $tagId }}" checked>
+					@else
 						<input class="form-check-input" type="checkbox" name="tags[]" value="{{ $tagId }}" id="radios{{ $tagId }}">
+					@endif
 						<label class="form-check-label" for="radios{{ $tagId }}">{{ $tagName }}</label>
 					</div>
 					@endforeach

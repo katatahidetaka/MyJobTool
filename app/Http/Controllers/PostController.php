@@ -35,10 +35,15 @@ class PostController extends Controller
         return view('post.show',compact('post'));
     }
     
-    public function edit(Post $post, Category $category)
+    public function edit(string $id, Category $category)
     {
+        $tagArray = [];
+        $post = Post::with('tags')->where('id', $id)->first();
+        foreach ($post->tags as $tag) {
+            array_push($tagArray, $tag->id);
+        }
         $tagList = $category->getTagList();
-        return view ('post.edit',compact('post','tagList'));
+        return view ('post.edit',compact('post','tagList', 'tagArray'));
     }
     
     public function update(StorePostRequest $request ,Post $post, PostService $service)
