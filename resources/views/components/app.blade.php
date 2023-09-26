@@ -36,9 +36,16 @@
 	</nav>
 </header>
 <body>
-<div class="container my-3">
-	<h1>{{ $title }}</h1>
-	{{ $slot }}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col">
+			<div class="container my-3">
+				<h1>{{ $title }}</h1>
+					{{ $slot }}
+			</div>
+		</div>
+		@yield('sidebar')
+	</div>
 </div>
 </body>
 <footer class="fixed-bottom">

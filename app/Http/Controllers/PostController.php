@@ -23,11 +23,12 @@ class PostController extends Controller
         return redirect()->route('post.index');
     }
     
-    public function index(Request $request)
+    public function index(Request $request, Category $category)
     {
         //Eager Loading
         $posts = Post::with('tags')->orderBy('created_at', 'DESC')->get();
-        return view('post.index',compact('posts'));
+        $categoryList[] = $category->getCategoryList();
+        return view('post.index',compact('posts', 'categoryList'));
     }
     
     public function show(Post $post)
