@@ -16,13 +16,18 @@ use App\Http\Controllers\SearchController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
     return view('index');
 })->name('home');
 
-Route::resource('post', PostController::class);
 
+Route::middleware('auth')->group(function(){
+    Route::get('/home', function () {
+        return view('welcome');
+    });
+});
+
+Route::resource('post', PostController::class);
 Route::resource('tag', TagController::class, 
     ['only' => ['index', 'store', 'update', 'destroy']]);
 

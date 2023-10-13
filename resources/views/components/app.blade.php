@@ -40,7 +40,7 @@
 	<div class="row">
 		<div class="col">
 			<div class="container my-3">
-				<h1>{{ $title }}</h1>
+				<h3>{{ $title }}</h3>
 					{{ $slot }}
 			</div>
 		</div>
