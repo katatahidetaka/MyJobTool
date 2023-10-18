@@ -15,7 +15,6 @@
 <header>
 	<nav class="navbar navbar-expand-sm bg-primary-subtle">
 		<div class="container-fluid">
-			<h1><a class="navbar-brand" href="{{ route('home') }}">MyJobTool</a></h1>
 			<button type="button" class="navbar-toggler"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
@@ -23,16 +22,32 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
+				<h1><a class="navbar-brand" href="{{ route('home') }}">MyJobTool</a></h1>
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link" href="{{ route('post.create') }}">記事新規作成</a></li>
 					<li class="nav-item"><a class="nav-link" href="{{ route('post.index') }}">記事一覧</a></li>
 					<li class="nav-item"><a class="nav-link" href="{{ route('tag.index') }}">タグ編集</a></li>
 					<li class="nav-item"><a class="nav-link" href="{{ route('category.index') }}">カテゴリ編集</a></li>
 				</ul>
+			</div><!-- /.navbar-collapse -->
+			<div class="d-flex">
+				@guest
+				<button type="button" id="registerBtn" class="btn btn-outline-secondary m-1" onclick="registerBtnClick()">{{__('Register')}}</button>
+				<button type="button" id="loginBtn" class="btn btn-outline-secondary m-1" onclick="loginBtnClick()">{{__('Login')}}</button>
+				@else
+				<button type="button" id="loginBtn" class="btn btn-outline-secondary m-1" onclick="logoutBtnClick()">{{__('Logout')}}</button>
+				@endguest
 			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container-fluid -->
+			<form action="{{ route('register') }}" method="GET" id="registerForm" class="d-none">
+			@csrf
+			</form>
+			<form action="{{ route('login') }}" method="GET" id="loginForm" class="d-none">
+			@csrf
+			</form>
+			<form action="{{ route('logout') }}" method="POST" id="logoutForm" class="d-none">
+			@csrf
+			</form>
+		</div><!-- /.container-fluid -->
 	</nav>
 </header>
 <body>
@@ -47,6 +62,20 @@
 		@yield('sidebar')
 	</div>
 </div>
+<script>
+	//新規登録ボタン押下時処理
+	function registerBtnClick(){
+		document.getElementById('registerForm').submit();
+	}
+	//ログインボタン押下時処理
+	function loginBtnClick(){
+		document.getElementById('loginForm').submit();
+	}
+	//ログアウトボタン押下時処理
+	function logoutBtnClick(){
+		document.getElementById('logoutForm').submit();
+	}
+</script>
 </body>
 <footer class="fixed-bottom">
 	<div class="conteiner-fluid bg-secondary-subtle">
