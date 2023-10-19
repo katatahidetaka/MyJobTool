@@ -15,6 +15,9 @@ class TagController extends Controller
      */
     public function index(Category $category)
     {
+        //TagPolicyによる認可
+        $this->authorize('viewAny', Tag::class);
+        
         $categoriesArray = $category->getCategoriesArray();
         $categoryList[] = $category->getCategoryList();
         return view('tag.index', compact('categoryList', 'categoriesArray'));
@@ -25,6 +28,9 @@ class TagController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
+        //TagPolicyによる認可
+        $this->authorize('create', Tag::class);
+        
         $tag = new Tag();
         $tag->name = $request->tagName;
         $tag->category_id = $request->categoryId;
@@ -38,6 +44,9 @@ class TagController extends Controller
      */
     public function update(StoreTagRequest $request)
     {
+        //TagPolicyによる認可
+        $this->authorize('update', Tag::class);
+        
         $tag = Tag::findOrFail($request->tagId);
         $tag->category_id = $request->categoryId;
         $tag->name = $request->tagName;
@@ -50,6 +59,9 @@ class TagController extends Controller
      */
     public function destroy(string $id)
     {
+        //TagPolicyによる認可
+        $this->authorize('delete', Tag::class);
+        
         try {
             DB::beginTransaction();
             

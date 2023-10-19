@@ -26,8 +26,12 @@
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link" href="{{ route('post.create') }}">記事新規作成</a></li>
 					<li class="nav-item"><a class="nav-link" href="{{ route('post.index') }}">記事一覧</a></li>
+					@can('viewAny', App\Models\Tag::class)
 					<li class="nav-item"><a class="nav-link" href="{{ route('tag.index') }}">タグ編集</a></li>
+					@endcan
+					@can('viewAny', App\Models\Category::class)
 					<li class="nav-item"><a class="nav-link" href="{{ route('category.index') }}">カテゴリ編集</a></li>
+					@endcan
 				</ul>
 			</div><!-- /.navbar-collapse -->
 			<div class="d-flex">
@@ -35,7 +39,8 @@
 				<button type="button" id="registerBtn" class="btn btn-outline-secondary m-1" onclick="registerBtnClick()">{{__('Register')}}</button>
 				<button type="button" id="loginBtn" class="btn btn-outline-secondary m-1" onclick="loginBtnClick()">{{__('Login')}}</button>
 				@else
-				<button type="button" id="loginBtn" class="btn btn-outline-secondary m-1" onclick="logoutBtnClick()">{{__('Logout')}}</button>
+				<span class="d-flex align-items-center">こんにちは、{{ Auth::user()->name }}さん </span>
+				<button type="button" id="loginBtn" class="btn btn-outline-secondary my-1 mx-3" onclick="logoutBtnClick()">{{__('Logout')}}</button>
 				@endguest
 			</div>
 			<form action="{{ route('register') }}" method="GET" id="registerForm" class="d-none">

@@ -15,6 +15,9 @@ class CategoryController extends Controller
      */
     public function index(Category $category)
     {
+        //CategoryPolicyによる認可
+        $this->authorize('viewAny',Category::class);
+        
         $categoryList[] = $category->getCategoryList();
         return view('category.index', compact('categoryList'));
     }
@@ -24,6 +27,9 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+        //CategoryPolicyによる認可
+        $this->authorize('create',Category::class);
+        
         $category = new Category();
         $category->name = $request->categoryName;
         $category->save();
@@ -36,6 +42,9 @@ class CategoryController extends Controller
      */
     public function update(StoreCategoryRequest $request, string $id)
     {
+        //CategoryPolicyによる認可
+        $this->authorize('update',Category::class);
+        
         $message = '';
         $category = Category::findOrFail($id);
         if($category->name !== $request->categoryName){
@@ -51,6 +60,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
+        //CategoryPolicyによる認可
+        $this->authorize('delete',Category::class);
+        
         //削除するカテゴリに所属するタグも削除する
         $tags = Tag::where('category_id', $id)->get();
         foreach($tags as $tagId) {
