@@ -5,7 +5,7 @@
 		@csrf
 		@method('put')
 		@include('common.error')
-		<div class="row mb-3">
+		<div class="row my-3">
 			<label class="col-sm-2 col-form-label">タイトル</label>
 			<div class="col-sm-10">
 				<input type="text" id="title" name="title" placeholder="50字以内" class="form-control" maxlength="50" value="{{ old('title',$post->title) }}">

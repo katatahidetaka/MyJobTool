@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PostService 
@@ -11,6 +12,7 @@ class PostService
     {
         DB::transaction(function () use ($request){
             $post = Post::create([
+                'user_id' => Auth::id(),//ログインしているユーザーのIDを登録
                 'title' => $request->title,
                 'content' => $request->content
             ]);

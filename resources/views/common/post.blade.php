@@ -19,6 +19,11 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col text-end">
+				<p>投稿者： {{ $post->user->name }}</p>
+			</div>
+		</div>
 		<!-- タグ指定していないときの$post->tagsもis_null,emptyに引っかからないので
 		何かしら値が入っているらしいので、tagsの配列の先頭を持ってきて有無を判定する -->
 		@if(!empty($post->tags[0]))

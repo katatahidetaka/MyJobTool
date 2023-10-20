@@ -29,7 +29,7 @@
                        	</div>
                     </div>
 					<div class="row d-flex justify-content-center">
-							<button type="submit" class="btn btn-outline-primary col-sm-2">{{__('login')}}</button>
+							<button type="submit" class="btn btn-outline-primary col-sm-2">{{__('Login')}}</button>
 					</div>
 				</form>
 			</div>

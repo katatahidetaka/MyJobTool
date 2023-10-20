@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tags', function (Blueprint $table) {
+            $table->comment('タグ管理用テーブル');
             $table->id();
-            $table->string('name');
-            $table->integer('category_id');
+            $table->string('name')->comment('タグ名');
+            $table->integer('category_id')->comment('所属カテゴリID');
             $table->datetimes();
         });
     }

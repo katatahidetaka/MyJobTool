@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
+            $table->comment('投稿記事テーブル');
             $table->id();
-            $table->string('title');
-            $table->string('content');
+            $table->integer('user_id')->comment('投稿ユーザーID');
+            $table->string('title')->comment('タイトル');
+            $table->string('content')->comment('本文');
             $table->datetimes();
         });
     }

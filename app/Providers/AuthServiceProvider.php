@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Policies\CategoryPolicy;
 use App\Policies\TagPolicy;
+use App\Models\Post;
+use App\Policies\PostPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Category::class => CategoryPolicy::class,
         Tag::class => TagPolicy::class,
+        Post::class => PostPolicy::class,
     ];
 
     /**

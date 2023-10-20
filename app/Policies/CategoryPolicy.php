@@ -14,7 +14,7 @@ class CategoryPolicy
      */
     public function viewAny(?User $user): Response
     {
-        return Auth::check() ? Response::allow() : Response::denyAsNotFound();
+        return Auth::check() ? Response::allow() : Response::denyWithStatus(404); //404エラーを返す
     }
 
     /**
@@ -22,7 +22,7 @@ class CategoryPolicy
      */
     public function create(?User $user): Response
     {
-        return Auth::check() ? Response::allow() : Response::denyAsNotFound();
+        return Auth::check() ? Response::allow() : Response::denyAsNotFound(); //404エラーはこの書き方もできる
     }
 
     /**

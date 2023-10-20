@@ -10,6 +10,7 @@
 	@endif
 		<div class="row">
 			<h2 class="col m-3">{{ $post->title }}</h2>
+			<span class="text-end">投稿者： {{$post->user->name}}</span>
 		</div>
 		<div class="row text-end border-top border-3">
 			<span class="col">投稿日：{{ $post->created_at->format('Y/m/d') }}　最終更新日：{{ $post->updated_at->format('Y/m/d') }}</span>
