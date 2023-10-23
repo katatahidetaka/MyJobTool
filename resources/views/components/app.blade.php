@@ -24,8 +24,10 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<h1><a class="navbar-brand" href="{{ route('home') }}">MyJobTool</a></h1>
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="{{ route('post.create') }}">記事新規作成</a></li>
 					<li class="nav-item"><a class="nav-link" href="{{ route('post.index') }}">記事一覧</a></li>
+					@can('create', App\Models\Post::class)
+					<li class="nav-item"><a class="nav-link" href="{{ route('post.create') }}">記事新規作成</a></li>
+					@endcan
 					@can('viewAny', App\Models\Tag::class)
 					<li class="nav-item"><a class="nav-link" href="{{ route('tag.index') }}">タグ編集</a></li>
 					@endcan
@@ -39,7 +41,7 @@
 				<button type="button" id="registerBtn" class="btn btn-outline-secondary m-1" onclick="registerBtnClick()">{{__('Register')}}</button>
 				<button type="button" id="loginBtn" class="btn btn-outline-secondary m-1" onclick="loginBtnClick()">{{__('Login')}}</button>
 				@else
-				<span class="d-flex align-items-center">こんにちは、{{ Auth::user()->name }}さん </span>
+				<span class="d-flex align-items-center"> </span>
 				<button type="button" id="loginBtn" class="btn btn-outline-secondary my-1 mx-3" onclick="logoutBtnClick()">{{__('Logout')}}</button>
 				@endguest
 			</div>
@@ -60,7 +62,7 @@
 	<div class="row">
 		<div class="col">
 			<div class="container my-3">
-				<h3>{{ $title }}</h3>
+				<h5>こんにちは、{{ Auth::user()->name ?? 'ゲスト' }}さん</h5>
 					{{ $slot }}
 			</div>
 		</div>

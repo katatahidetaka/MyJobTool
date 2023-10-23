@@ -26,15 +26,15 @@ class PostSeeder extends Seeder
         ]);
         
         Post::create([
-            'user_id' => '1',
+            'user_id' => '2',
             'title' => 'テストタイトル３',
-            'content' => 'テスト投稿３'
+            'content' => 'テスト投稿３Hanako'
         ]);
         
         Post::create([
-            'user_id' => '1',
+            'user_id' => '2',
             'title' => 'テストタイトル４',
-            'content' => 'テスト投稿４'
+            'content' => 'テスト投稿４Hanako'
         ]);
     }
 }

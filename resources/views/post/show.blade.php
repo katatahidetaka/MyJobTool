@@ -32,8 +32,12 @@
 		</div>
 		<div class="row">
 			<div class="col my-2">
+					@can('update', $post)
 					<a href="{{ route('post.edit',$post) }}"><button class="btn btn-primary">編集する</button></a>
-					<button class="btn btn-danger" onclick="destroyBtn()">削除する</button>	
+					@endcan
+					@can('delete', $post)
+					<button class="btn btn-danger" onclick="destroyBtn()">削除する</button>
+					@endcan
 			</div>
 		</div>
 	</div>
