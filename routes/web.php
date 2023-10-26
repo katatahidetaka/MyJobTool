@@ -22,18 +22,13 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->group(function(){
-    Route::get('/home', function () {
-        return view('welcome');
-    });    
+    Route::resource('tag', TagController::class,
+        ['only' => ['index', 'store', 'update', 'destroy']]);
+    Route::resource('category', CategoryController::class,
+        ['only' => ['index', 'store', 'update', 'destroy']]);
 });
 
 Route::resource('post', PostController::class);
-
-Route::resource('tag', TagController::class,
-    ['only' => ['index', 'store', 'update', 'destroy']]);
-
-Route::resource('category', CategoryController::class,
-    ['only' => ['index', 'store', 'update', 'destroy']]);
 
 Route::get('search/tag/{tag}', [SearchController::class, 'searchByTags'])
     ->name('searchByTags');

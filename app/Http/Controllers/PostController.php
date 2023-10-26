@@ -11,6 +11,10 @@ class PostController extends Controller
 {
     public function __construct()
     {
+        //Authミドルウェアによる認証処理の記述
+        //indexメソッドとshowメソッド以外にAuthミドルウェアを適用する
+        $this->middleware('auth')->except(['index','show']);
+        //PotPolicyによる認可処理のための記述
         $this->authorizeResource(Post::class,'post');
     }
     
