@@ -15,11 +15,7 @@
 							<input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
 						</div>
 					</div> <!-- row -->
-					@if (session('status'))
-						<div class="alert alert-success" role="alert">
-        					{{ session('status') }}
-   			 			</div>
-					@endif
+					@include('common.status')
 					<div class="row d-flex justify-content-center">
 							<button type="submit" class="btn btn-outline-primary col-auto">{{__('Send Password Reset Link')}}</button>
 					</div>

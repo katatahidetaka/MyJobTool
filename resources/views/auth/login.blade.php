@@ -4,6 +4,7 @@
 		<div class="col-md-8">
 			<div class="container border p-3">
 			@include('common.error')
+			@include('common.status')
 				<form method="post" action="{{ route('login') }}">
 				@csrf
 					<div class="row mb-3 d-flex justify-content-center">
