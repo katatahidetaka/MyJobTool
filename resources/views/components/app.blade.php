@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
 <meta charset="UTF-8">
-<meta name=”viewport” content=”width=device-width,initial-scale=1”>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>MyJobTool|{{ $title }}</title>
 <!-- Bootstrap -->
@@ -38,19 +39,13 @@
 			</div><!-- /.navbar-collapse -->
 			<div class="d-flex">
 				@guest
-				<button type="button" id="registerBtn" class="btn btn-outline-secondary m-1" onclick="registerBtnClick()">{{__('Register')}}</button>
-				<button type="button" id="loginBtn" class="btn btn-outline-secondary m-1" onclick="loginBtnClick()">{{__('Login')}}</button>
+				<a href="{{ route('register') }}"><button class="btn btn-outline-secondary m-1">{{__('Register')}}</button></a>
+				<a href="{{ route('login') }}"><button class="btn btn-outline-secondary m-1">{{__('Login')}}</button></a>
 				@else
 				<span class="d-flex align-items-center"> </span>
 				<button type="button" id="loginBtn" class="btn btn-outline-secondary my-1 mx-3" onclick="logoutBtnClick()">{{__('Logout')}}</button>
 				@endguest
 			</div>
-			<form action="{{ route('register') }}" method="GET" id="registerForm" class="d-none">
-			@csrf
-			</form>
-			<form action="{{ route('login') }}" method="GET" id="loginForm" class="d-none">
-			@csrf
-			</form>
 			<form action="{{ route('logout') }}" method="POST" id="logoutForm" class="d-none">
 			@csrf
 			</form>
@@ -70,14 +65,6 @@
 	</div>
 </div>
 <script>
-	//新規登録ボタン押下時処理
-	function registerBtnClick(){
-		document.getElementById('registerForm').submit();
-	}
-	//ログインボタン押下時処理
-	function loginBtnClick(){
-		document.getElementById('loginForm').submit();
-	}
 	//ログアウトボタン押下時処理
 	function logoutBtnClick(){
 		document.getElementById('logoutForm').submit();
