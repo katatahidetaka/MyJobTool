@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Listeners\UserEventSubscriber;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,11 +19,22 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        'Illuminate\Auth\Events\Login' => [
-            'App\Listeners\LogSuccessfulLogin',
-        ],
+        //サブスクライバの記述に含めるためコメントアウト
+//         'Illuminate\Auth\Events\Login' => [
+//             'App\Listeners\LogSuccessfulLogin',
+//         ],
+        
     ];
-
+    
+    /*
+     * サブスクライバクラスの登録
+     *
+     * @var array
+     */
+    protected $subscribe = [
+        UserEventSubscriber::class,
+    ];
+    
     /**
      * Register any events for your application.
      */
