@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use App\Models\Category;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Http\Requests\searchWordRequest;
 
@@ -20,7 +19,7 @@ class SearchController extends Controller
         if (is_null($tag)) {
             return back()->with('errormessage', 'タグが見つかりません');
         }
-        $posts = $tag->posts()->orderBy('created_at', 'DESC')->get();
+        $posts = $tag->posts()->orderBy('created_at', 'DESC')->paginate(5);
         $tagName = $tag->name;
         $categoryList[] = $category->getCategoryList();
         
@@ -37,9 +36,8 @@ class SearchController extends Controller
             $posts = Post::where('title', 'like', '%'. $keyword. '%')
             ->orwhere('content', 'like', '%'. $keyword. '%')
             ->orderBy('created_at', 'DESC')
-            ->get();
+            ->paginate(5);
         }
-
         $categoryList[] = $category->getCategoryList();
         
         return view('search.keyword',compact('posts', 'inputKeyword', 'categoryList'));

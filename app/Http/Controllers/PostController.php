@@ -21,7 +21,7 @@ class PostController extends Controller
     public function index(Category $category)
     {
         //Eager Loading
-        $posts = Post::with(['tags','user:id,name'])->orderBy('created_at', 'DESC')->get();
+        $posts = Post::with(['tags','user:id,name'])->orderBy('created_at', 'DESC')->paginate(5);
         $categoryList[] = $category->getCategoryList();
         return view('post.index',compact('posts', 'categoryList'));
     }
