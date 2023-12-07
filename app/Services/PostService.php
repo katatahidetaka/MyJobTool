@@ -26,7 +26,7 @@ class PostService
         });
     }
     
-    public function updatePost($request, $post)
+    public function updatePost($request, $post) :void
     {
         $post->title = $request->title;
         $post->content = $request->content;
@@ -39,7 +39,7 @@ class PostService
         }
     }
     
-    public function deletePost($post)
+    public function deletePost($post) :void
     {
         $id = $post->id;
         DB::transaction(function() use ($id){

@@ -1,5 +1,9 @@
 <div class="container">
 <x-message :message="session('message')"/>
+@include('common.error')
+	@if ($posts->isEmpty())
+		<div>検索結果はありませんでした</div>
+	@endif
 	@foreach($posts as $post)
 	<div class="container border rounded my-1">
 		<div class="row bg-info-subtle">
@@ -25,8 +29,11 @@
 			</div>
 		</div>
 		<!-- タグ指定していないときの$post->tagsもis_null,emptyに引っかからないので
-		何かしら値が入っているらしいので、tagsの配列の先頭を持ってきて有無を判定する -->
-		@if(!empty($post->tags[0]))
+		何かしら値が入っているらしいので、tagsの配列の先頭を持ってきて有無を判定する
+		if(!empty($post->tags[0]))
+		コレクションのisEmpty()メソッドならいけるんじゃないかと思って変えてみた -->
+
+		@if(!$post->tags->isEmpty())
 		<div class="row">
 			<div class="col border-top">
 				<div class= "col mt-2 text-end">
