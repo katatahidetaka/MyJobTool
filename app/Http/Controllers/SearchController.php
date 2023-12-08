@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tag;
 use App\Models\Category;
 use Illuminate\Contracts\View\View;
 use App\Http\Requests\searchWordRequest;
