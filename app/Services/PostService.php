@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class PostService 
 {
+    public function getPosts() :object
+    {
+        return Post::with(['tags','user:id,name'])->orderBy('created_at', 'DESC')->paginate(5);
+    }
+    
     public function storePost($request) :void
     {
         DB::transaction(function () use ($request){

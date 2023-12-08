@@ -14,14 +14,13 @@ class PostController extends Controller
         //Authミドルウェアによる認証処理の記述
         //indexメソッドとshowメソッド以外にAuthミドルウェアを適用する
         $this->middleware('auth')->except(['index','show']);
-        //PotPolicyによる認可処理のための記述
+        //PostPolicyによる認可処理のための記述
         $this->authorizeResource(Post::class,'post');
     }
     
-    public function index(Category $category)
+    public function index(Category $category, PostService $service)
     {
-        //Eager Loading
-        $posts = Post::with(['tags','user:id,name'])->orderBy('created_at', 'DESC')->paginate(5);
+        $posts = $service->getPosts();
         $categoryList[] = $category->getCategoryList();
         return view('post.index',compact('posts', 'categoryList'));
     }
