@@ -10,23 +10,21 @@ use App\Services\SearchService;
 
 class SearchController extends Controller
 {
-    public function searchByTags(int $id, Category $category) :mixed
+    public function searchByTags(int $id, Category $category, SearchService $service):mixed
     {
-        $posts = [];
-        $tagName = "";
-        
-        $tag = Tag::find($id);
-        if (is_null($tag)) {
+        if ($service->boolTagIsNull($id)) {
             return back()->with('errormessage', 'タグが見つかりません');
         }
-        $posts = $tag->posts()->orderBy('created_at', 'DESC')->paginate(5);
-        $tagName = $tag->name;
+        $result = $service->getPostSearchedByTags($id);
+        $posts = $result['posts'];
+        $tagName = $result['tagName'];
+        
         $categoryList[] = $category->getCategoryList();
         
         return view('search.tag',compact('posts', 'tagName', 'categoryList'));
     }
     
-    public function searchByKeywords(searchWordRequest $request, Category $category, SearchService $service) :View
+    public function searchByKeywords(searchWordRequest $request, Category $category, SearchService $service):View
     {
         $inputKeyword = $request->inputKeyword;
         $service->getPostSearchedByKeywords($inputKeyword);
