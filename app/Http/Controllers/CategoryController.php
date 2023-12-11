@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Category;
@@ -10,14 +9,15 @@ use App\Models\Tag;
 
 class CategoryController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index(Category $category)
     {
-        //CategoryPolicyによる認可
-        $this->authorize('viewAny',Category::class);
-        
+        // CategoryPolicyによる認可
+        $this->authorize('viewAny', Category::class);
+
         $categoryList[] = $category->getCategoryList();
         return view('category.index', compact('categoryList'));
     }
@@ -27,13 +27,13 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //CategoryPolicyによる認可
-        $this->authorize('create',Category::class);
-        
+        // CategoryPolicyによる認可
+        $this->authorize('create', Category::class);
+
         $category = new Category();
         $category->name = $request->categoryName;
         $category->save();
-        
+
         return redirect()->route('category.index')->with('message', '新規カテゴリを作成しました');
     }
 
@@ -42,12 +42,12 @@ class CategoryController extends Controller
      */
     public function update(StoreCategoryRequest $request, string $id)
     {
-        //CategoryPolicyによる認可
-        $this->authorize('update',Category::class);
-        
+        // CategoryPolicyによる認可
+        $this->authorize('update', Category::class);
+
         $message = '';
         $category = Category::findOrFail($id);
-        if($category->name !== $request->categoryName){
+        if ($category->name !== $request->categoryName) {
             $category->name = $request->categoryName;
             $category->save();
             $message = "カテゴリを編集しました";
@@ -60,16 +60,16 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //CategoryPolicyによる認可
-        $this->authorize('delete',Category::class);
-        
-        //削除するカテゴリに所属するタグも削除する
+        // CategoryPolicyによる認可
+        $this->authorize('delete', Category::class);
+
+        // 削除するカテゴリに所属するタグも削除する
         $tags = Tag::where('category_id', $id)->get();
-        foreach($tags as $tagId) {
+        foreach ($tags as $tagId) {
             try {
                 DB::beginTransaction();
-                
-                $tag = Tag::with('posts')->where('id',$tagId->id)->firstOrFail();
+
+                $tag = Tag::with('posts')->where('id', $tagId->id)->firstOrFail();
                 $tag->posts()->detach();
                 $tag->delete();
 
@@ -80,10 +80,10 @@ class CategoryController extends Controller
                 return redirect()->route('tag.index')->with('message', '処理に失敗しました');
             }
         }
-        
+
         $category = Category::findOrFail($id);
         $category->delete();
-        
+
         return redirect()->route('category.index')->with('message', 'タグを削除しました');
     }
 }

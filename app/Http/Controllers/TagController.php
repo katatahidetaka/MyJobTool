@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
@@ -10,14 +9,15 @@ use App\Http\Requests\StoreTagRequest;
 
 class TagController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index(Category $category)
     {
-        //TagPolicyによる認可
+        // TagPolicyによる認可
         $this->authorize('viewAny', Tag::class);
-        
+
         $categoriesArray = $category->getCategoriesArray();
         $categoryList[] = $category->getCategoryList();
         return view('tag.index', compact('categoryList', 'categoriesArray'));
@@ -28,14 +28,14 @@ class TagController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-        //TagPolicyによる認可
+        // TagPolicyによる認可
         $this->authorize('create', Tag::class);
-        
+
         $tag = new Tag();
         $tag->name = $request->tagName;
         $tag->category_id = $request->categoryId;
         $tag->save();
-        
+
         return redirect()->route('tag.index')->with('message', '新規タグを作成しました');
     }
 
@@ -44,9 +44,9 @@ class TagController extends Controller
      */
     public function update(StoreTagRequest $request)
     {
-        //TagPolicyによる認可
+        // TagPolicyによる認可
         $this->authorize('update', Tag::class);
-        
+
         $tag = Tag::findOrFail($request->tagId);
         $tag->category_id = $request->categoryId;
         $tag->name = $request->tagName;
@@ -59,13 +59,13 @@ class TagController extends Controller
      */
     public function destroy(string $id)
     {
-        //TagPolicyによる認可
+        // TagPolicyによる認可
         $this->authorize('delete', Tag::class);
-        
+
         try {
             DB::beginTransaction();
-            
-            $tag = Tag::with('posts')->where('id',$id)->firstOrFail();
+
+            $tag = Tag::with('posts')->where('id', $id)->firstOrFail();
             $tag->posts()->detach();
             $tag->delete();
 
@@ -75,7 +75,7 @@ class TagController extends Controller
             Log::error($e);
             return redirect()->route('tag.index')->with('message', '処理に失敗しました');
         }
-        
+
         return redirect()->route('tag.index')->with('message', 'タグを削除しました');
     }
 }
