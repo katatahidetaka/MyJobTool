@@ -26,7 +26,7 @@ class SearchController extends Controller
     public function searchByKeywords(searchWordRequest $request, Category $category, SearchService $service):View
     {
         $inputKeyword = $request->inputKeyword;
-        $service->getPostSearchedByKeywords($inputKeyword);
+        $posts = $service->getPostSearchedByKeywords($inputKeyword);
         $categoryList[] = $category->getCategoryList();
         
         return view('search.keyword',compact('posts', 'inputKeyword', 'categoryList'));

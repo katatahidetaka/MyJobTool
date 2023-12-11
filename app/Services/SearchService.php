@@ -11,7 +11,11 @@ class SearchService
     {
         return Tag::find($id) === null;
     }
-    
+    /**
+     * タグIDと紐づくpostを取得して返す
+     * @param int $id
+     * @return array　['posts' => $posts, 'tagName' => $tagName]
+     */
     public function getPostSearchedByTags(int $id):array
     {
         $tag = Tag::find($id);
