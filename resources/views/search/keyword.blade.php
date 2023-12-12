@@ -1,6 +1,6 @@
 <x-app>
-	<x-slot name="title">『{{ $inputKeyword }}』の検索結果</x-slot>
-	<h4>『{{ $inputKeyword }}』の検索結果</h4>
+	<x-slot name="title">キーワード『{{ $inputKeyword }}』</x-slot>
+	<x-slot name="index">キーワード『{{ $inputKeyword }}』</x-slot>
 	@include('common.post')
 	@section('sidebar')
 		@include('common.sidebar')
