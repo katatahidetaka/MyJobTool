@@ -61,44 +61,21 @@
 <body>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col">
+			<div class="col mt-4">
 				<div class="container my-3">
-					<div class="container">
-						<div class="row">
-							<div class="col-auto d-flex align-items-center">
-								@if (isset($index))
-								<h5 class="my-1">{{ $index }}</h5>
-								@else
-								<h5 class="my-1">こんにちは、{{ Auth::user()->name ?? 'ゲスト' }}さん</h5>
-								@endif
-							</div>
-							<div class="col text-end ms-auto d-block d-md-none">
-								<button type="button" class="btn btn-outline-secondary my-1"
-									data-bs-toggle="offcanvas" data-bs-target="#searchOffcanvas"
-									aria-expanded="false">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-										fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-									<path
-											d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-									</svg>
-								</button>
+					<div class="d-flex justify-content-center">
+						<div class="col col-lg-8">
+							<div class="container border p-0">
+								<div class="border-bottom">
+									<h5 class="m-3">{{ $title }}</h5>
+								</div>
+								{{ $slot }}
 							</div>
 						</div>
 					</div>
-					{{ $slot }}
 				</div>
 			</div>
-			<div class="col-3 d-none d-md-block">@yield('sidebar')</div>
 		</div>
-	</div>
-	<div class="offcanvas offcanvas-start" tabindex="-1"
-		id="searchOffcanvas">
-		<div class="offcanvas-header">
-			<h5 class="offcanvas-title" id="searchOffcanvasLabel">検索</h5>
-			<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-				aria-label="閉じる"></button>
-		</div>
-		<div class="offcanvas-body">@yield('sidebar')</div>
 	</div>
 	<script>
 	//ログアウトボタン押下時処理

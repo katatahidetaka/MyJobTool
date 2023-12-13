@@ -32,5 +32,5 @@ Route::resource('post', PostController::class);
 
 Route::get('search/tag/{tag}', [SearchController::class, 'searchByTags'])
     ->name('searchByTags');
-Route::get('search/keyword/', [SearchController::class, 'searchByKeywords'])
+Route::get('search/keyword', [SearchController::class, 'searchByKeywords'])
     ->name('searchByKeywords');
