@@ -1,4 +1,6 @@
-<x-auth> <x-slot name="title">{{ __('Reset Password') }}</x-slot>
+<x-app>
+<x-slot name="title">{{__('Login')}}</x-slot>
+<x-slot name="header">{{__('Login')}}</x-slot>
 @include('common.error')
 <form method="post" action="{{ route('password.update') }}" class="p-4">
 	@csrf
@@ -33,4 +35,4 @@
 		<button type="submit" class="btn btn-outline-primary col-auto">{{__('Reset Password')}}</button>
 	</div>
 </form>
-</x-auth>
+</x-app>

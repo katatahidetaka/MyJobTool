@@ -1,4 +1,6 @@
-<x-auth> <x-slot name="title">{{__('Login')}}</x-slot>
+<x-app>
+<x-slot name="title">{{__('Login')}}</x-slot>
+<x-slot name="header">{{__('Login')}}</x-slot>
 @include('common.error')
 @include('common.status')
 <form method="post" action="{{ route('login') }}" class="p-4">
@@ -33,4 +35,4 @@
 		<button type="submit" class="btn btn-outline-primary col-4 col-sm-2">{{__('Login')}}</button>		
 	</div>
 </form>
-</x-auth>
+</x-app>

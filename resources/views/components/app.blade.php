@@ -14,8 +14,11 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <header>
-	<nav class="navbar navbar-expand-sm bg-primary-subtle">
+	<nav class="navbar navbar-expand-md bg-primary-subtle">
 		<div class="container-fluid">
+		<h1 class="mx-3">
+			<a class="navbar-brand" href="{{ route('home') }}">MyJobTool</a>
+		</h1>
 			<button type="button" class="navbar-toggler"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
@@ -23,10 +26,8 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
-				<h1>
-					<a class="navbar-brand" href="{{ route('home') }}">MyJobTool</a>
-				</h1>
-				<ul class="navbar-nav">
+
+				<ul class="navbar-nav me-auto my-2 my-xl-0  navbar-nav-scroll" style="--bs-scroll-height: 100px;">
 					<li class="nav-item"><a class="nav-link"
 						href="{{ route('post.index') }}">記事一覧</a></li> @can('create',
 					App\Models\Post::class)
@@ -39,19 +40,19 @@
 					<li class="nav-item"><a class="nav-link"
 						href="{{ route('category.index') }}">カテゴリ編集</a></li> @endcan
 				</ul>
+				<div class="d-flex">
+					@guest <a href="{{ route('register') }}"><button
+							class="btn btn-outline-secondary m-1">{{__('Register')}}</button></a>
+					<a href="{{ route('login') }}"><button
+							class="btn btn-outline-secondary m-1">{{__('Login')}}</button></a>
+					@else <span class="d-flex align-items-center"> </span>
+					<button type="button" id="loginBtn"
+						class="btn btn-outline-secondary my-1 mx-3"
+						onclick="logoutBtnClick()">{{__('Logout')}}</button>
+					@endguest
+				</div>
 			</div>
 			<!-- /.navbar-collapse -->
-			<div class="d-flex">
-				@guest <a href="{{ route('register') }}"><button
-						class="btn btn-outline-secondary m-1">{{__('Register')}}</button></a>
-				<a href="{{ route('login') }}"><button
-						class="btn btn-outline-secondary m-1">{{__('Login')}}</button></a>
-				@else <span class="d-flex align-items-center"> </span>
-				<button type="button" id="loginBtn"
-					class="btn btn-outline-secondary my-1 mx-3"
-					onclick="logoutBtnClick()">{{__('Logout')}}</button>
-				@endguest
-			</div>
 			<form action="{{ route('logout') }}" method="POST" id="logoutForm"
 				class="d-none">@csrf</form>
 		</div>
@@ -60,6 +61,26 @@
 </header>
 <body>
 	<div class="container-fluid">
+		@if (isset($header))
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col mt-4">
+					<div class="container my-3">
+						<div class="d-flex justify-content-center">
+							<div class="col col-lg-8">
+								<div class="container border p-0">
+									<div class="border-bottom">
+										<h5 class="m-3">{{ $header }}</h5>
+									</div>
+									{{ $slot }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		@else
 		<div class="row">
 			<div class="col">
 				<div class="container my-3">
@@ -72,6 +93,7 @@
 								<h5 class="my-1">こんにちは、{{ Auth::user()->name ?? 'ゲスト' }}さん</h5>
 								@endif
 							</div>
+							@if (isset($categoryList))
 							<div class="col text-end ms-auto d-block d-md-none">
 								<button type="button" class="btn btn-outline-secondary my-1"
 									data-bs-toggle="offcanvas" data-bs-target="#searchOffcanvas"
@@ -83,14 +105,19 @@
 									</svg>
 								</button>
 							</div>
+							@endif
 						</div>
 					</div>
 					{{ $slot }}
 				</div>
 			</div>
+			@if (isset($categoryList))
 			<div class="col-3 d-none d-md-block">@yield('sidebar')</div>
+			@endif
 		</div>
 	</div>
+	@endif
+	@if (isset($categoryList))
 	<div class="offcanvas offcanvas-start" tabindex="-1"
 		id="searchOffcanvas">
 		<div class="offcanvas-header">
@@ -100,6 +127,7 @@
 		</div>
 		<div class="offcanvas-body">@yield('sidebar')</div>
 	</div>
+	@endif
 	<script>
 	//ログアウトボタン押下時処理
 	function logoutBtnClick(){

@@ -1,4 +1,6 @@
-<x-auth> <x-slot name="title">{{__('Create Account')}}</x-slot>
+<x-app>
+<x-slot name="title">{{__('Create Account')}}</x-slot>
+<x-slot name="header">{{__('Create Account')}}</x-slot>
 @include('common.error')
 <form method="post" action="{{ route('register') }}" class="p-4">
 	@csrf
@@ -38,4 +40,4 @@
 		<button type="submit" class="btn btn-outline-primary col-4 col-sm-2">{{__('Register')}}</button>
 	</div>
 </form>
-</x-auth>
+</x-app>
