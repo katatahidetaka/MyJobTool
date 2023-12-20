@@ -93,7 +93,6 @@
 								<h5 class="my-1">こんにちは、{{ Auth::user()->name ?? 'ゲスト' }}さん</h5>
 								@endif
 							</div>
-							@if (isset($categoryList))
 							<div class="col text-end ms-auto d-block d-md-none">
 								<button type="button" class="btn btn-outline-secondary my-1"
 									data-bs-toggle="offcanvas" data-bs-target="#searchOffcanvas"
@@ -105,19 +104,15 @@
 									</svg>
 								</button>
 							</div>
-							@endif
 						</div>
 					</div>
 					{{ $slot }}
 				</div>
 			</div>
-			@if (isset($categoryList))
 			<div class="col-3 d-none d-md-block">@yield('sidebar')</div>
-			@endif
 		</div>
 	</div>
 	@endif
-	@if (isset($categoryList))
 	<div class="offcanvas offcanvas-start" tabindex="-1"
 		id="searchOffcanvas">
 		<div class="offcanvas-header">
@@ -127,7 +122,6 @@
 		</div>
 		<div class="offcanvas-body">@yield('sidebar')</div>
 	</div>
-	@endif
 	<script>
 	//ログアウトボタン押下時処理
 	function logoutBtnClick(){

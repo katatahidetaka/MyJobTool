@@ -1,5 +1,5 @@
 <x-app>
-	<x-slot name="title">記事一覧</x-slot>
+	<x-slot name="title">{{__('Article List')}}</x-slot>
 	@include('common.post')
 	@section('sidebar')
 		@include('common.sidebar')

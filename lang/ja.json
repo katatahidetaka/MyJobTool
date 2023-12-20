@@ -139,5 +139,6 @@
     "to": "から",
     "Showing": "表示中：",
     
-    "The :attribute must be at least :length characters.": ":attributeには:length文字以上使用してください。"
+    "The :attribute must be at least :length characters.": ":attributeには:length文字以上使用してください。",
+    "Article List": "記事一覧"
 }
