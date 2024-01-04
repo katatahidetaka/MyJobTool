@@ -1,5 +1,13 @@
 <x-app>
 	<x-slot name="title">タグ編集</x-slot>
+	<x-slot name="breadcrumb">
+		<nav aria-label="breadcrumb">
+  			<ol class="breadcrumb">
+    			<li class="breadcrumb-item"><a href="{{ route('post.index') }}">{{__('Article List')}}</a></li>
+    			<li class="breadcrumb-item active" aria-current="page">タグ編集</li>
+  			</ol>
+		</nav>
+	</x-slot>
 	<x-message :message="session('message')"/>
 	@include('common.error')
 	<div class="border rounded p-3 mb-3 container">

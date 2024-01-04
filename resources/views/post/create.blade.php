@@ -1,5 +1,13 @@
 <x-app>
-	<x-slot name="title">記事新規作成</x-slot>
+	<x-slot name="title">{{__('Create Article')}}</x-slot>
+	<x-slot name="breadcrumb">
+		<nav aria-label="breadcrumb">
+  			<ol class="breadcrumb">
+    			<li class="breadcrumb-item"><a href="{{ route('post.index') }}">{{__('Article List')}}</a></li>
+    			<li class="breadcrumb-item active" aria-current="page">{{__('Create Article')}}</li>
+  			</ol>
+		</nav>
+	</x-slot>
 	@include('common.error')
 	<form method="post" action="{{ route('post.store') }}"
 		class="container border rounded mt-5">

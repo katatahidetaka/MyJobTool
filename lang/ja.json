@@ -140,5 +140,7 @@
     "Showing": "表示中：",
     
     "The :attribute must be at least :length characters.": ":attributeには:length文字以上使用してください。",
-    "Article List": "記事一覧"
+    "Article List": "記事一覧",
+    "Edit Articles": "記事の編集",
+    "Create Article": "新規作成"
 }

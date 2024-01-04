@@ -1,5 +1,13 @@
 <x-app>
 	<x-slot name="title">記事詳細</x-slot>
+	<x-slot name="breadcrumb">
+		<nav aria-label="breadcrumb">
+  			<ol class="breadcrumb">
+    			<li class="breadcrumb-item"><a href="{{ route('post.index') }}">{{__('Article List')}}</a></li>
+    			<li class="breadcrumb-item active" aria-current="page">{{ $post->title }}</li>
+  			</ol>
+		</nav>
+	</x-slot>
 	<div class="container border rounded my-3 shadow">
 	@if(session('message'))
 		<div class="row my-2">

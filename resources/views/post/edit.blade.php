@@ -1,5 +1,14 @@
 <x-app>
-	<x-slot name="title">記事の編集</x-slot>
+	<x-slot name="title">{{__('Edit Articles')}}</x-slot>
+	<x-slot name="breadcrumb">
+		<nav aria-label="breadcrumb">
+  			<ol class="breadcrumb">
+    			<li class="breadcrumb-item"><a href="{{ route('post.index') }}">{{__('Article List')}}</a></li>
+    			<li class="breadcrumb-item"><a href="{{ route('post.show',$post) }}">{{ $post->title }}</a></li>
+    			<li class="breadcrumb-item active" aria-current="page">{{__('Edit Articles')}}</li>
+  			</ol>
+		</nav>
+	</x-slot>
 	<form method="post" action="{{ route('post.update',$post) }}"
 		class="container border rounded mt-5">
 		@csrf

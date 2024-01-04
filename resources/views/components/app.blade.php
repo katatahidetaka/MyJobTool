@@ -16,9 +16,9 @@
 <header>
 	<nav class="navbar navbar-expand-md bg-primary-subtle">
 		<div class="container-fluid">
-		<h1 class="mx-3">
-			<a class="navbar-brand" href="{{ route('home') }}">MyJobTool</a>
-		</h1>
+			<h1 class="mx-3">
+				<a class="navbar-brand" href="{{ route('post.index') }}">MyJobTool</a>
+			</h1>
 			<button type="button" class="navbar-toggler"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
@@ -27,28 +27,34 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 
-				<ul class="navbar-nav me-auto my-2 my-xl-0  navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+				<ul class="navbar-nav me-auto my-2 my-xl-0  navbar-nav-scroll"
+					style="--bs-scroll-height: 100px;">
+					@can('create', App\Models\Post::class)
 					<li class="nav-item"><a class="nav-link"
-						href="{{ route('post.index') }}">記事一覧</a></li> @can('create',
-					App\Models\Post::class)
-					<li class="nav-item"><a class="nav-link"
-						href="{{ route('post.create') }}">記事新規作成</a></li> @endcan
+						href="{{ route('post.create') }}">{{__('Create Article')}}</a></li>
+					@endcan
 					@can('viewAny', App\Models\Tag::class)
 					<li class="nav-item"><a class="nav-link"
-						href="{{ route('tag.index') }}">タグ編集</a></li> @endcan
+						href="{{ route('tag.index') }}">タグ編集</a></li>
+					@endcan
 					@can('viewAny', App\Models\Category::class)
 					<li class="nav-item"><a class="nav-link"
-						href="{{ route('category.index') }}">カテゴリ編集</a></li> @endcan
+						href="{{ route('category.index') }}">カテゴリ編集</a></li>
+					@endcan
 				</ul>
 				<div class="d-flex">
-					@guest <a href="{{ route('register') }}"><button
-							class="btn btn-outline-secondary m-1">{{__('Register')}}</button></a>
-					<a href="{{ route('login') }}"><button
-							class="btn btn-outline-secondary m-1">{{__('Login')}}</button></a>
-					@else <span class="d-flex align-items-center"> </span>
-					<button type="button" id="loginBtn"
-						class="btn btn-outline-secondary my-1 mx-3"
-						onclick="logoutBtnClick()">{{__('Logout')}}</button>
+					@guest 
+					<a href="{{ route('register') }}">
+						<button	class="btn btn-outline-secondary m-1">{{__('Register')}}</button>
+					</a>
+					<a href="{{ route('login') }}">
+						<button	class="btn btn-outline-secondary m-1">{{__('Login')}}</button>
+					</a>
+					@else
+					<span class="d-flex align-items-center"> </span>
+						<button type="button" id="loginBtn"
+							class="btn btn-outline-secondary my-1 mx-3"
+							onclick="logoutBtnClick()">{{__('Logout')}}</button>
 					@endguest
 				</div>
 			</div>
@@ -86,6 +92,7 @@
 				<div class="container my-3">
 					<div class="container">
 						<div class="row">
+							@isset ($breadcrumb) {{ $breadcrumb }} @endif
 							<div class="col-auto d-flex align-items-center">
 								@if (isset($index))
 								<h5 class="my-1">{{ $index }}</h5>
